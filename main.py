@@ -6,11 +6,10 @@ from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 
+app.frontend("/", directory="frontend/dist")
+
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
-    return templates.TemplateResponse(
-        request=request, name="index.html"
-    )
+
